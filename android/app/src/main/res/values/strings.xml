@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Park\'In</string>
+    <string name="title_activity_main">Park\'In</string>
+    <string name="package_name">com.kgv.parkin</string>
+    <string name="custom_url_scheme">com.kgv.parkin</string>
+</resources>

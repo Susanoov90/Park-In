@@ -1,0 +1,14 @@
+.customButton--button{
+    width: 100%;
+}
+
+.customButton--div{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-right: 10rem;
+}
+
+.customButton--div--child{
+    width: 50%;
+}

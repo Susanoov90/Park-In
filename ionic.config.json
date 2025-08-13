@@ -1,0 +1,7 @@
+{
+  "name": "parkin",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
