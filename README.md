@@ -1,15 +1,13 @@
+# 🚗 Park' In – La solution intelligente de gestion de parking
 
-# 🚗 Parkin – La solution intelligente de gestion de parking
-
-**Parkin** est une application mobile et web innovante qui simplifie la gestion et la réservation des places de parking pour **plusieurs entreprises et sites**.  
+**Parkin** est une application mobile et web innovante qui simplifie la gestion et la réservation des places de parking pour **plusieurs entreprises et sites**.
 Pensée pour les organisations modernes, elle offre une expérience fluide, rapide et intuitive, aussi bien pour les gestionnaires que pour les utilisateurs.
 
 ---
 
-## 🌟 Pourquoi Parkin ?
+## 🌟 Pourquoi Park' In ?
 
-La gestion du stationnement dans un environnement multi-sites est souvent complexe.  
-Parkin centralise toutes les informations et actions dans une interface unique, permettant à vos employés, visiteurs ou partenaires de :
+La gestion du stationnement dans un environnement multi-sites est souvent complexe.Parkin centralise toutes les informations et actions dans une interface unique, permettant à vos employés, visiteurs ou partenaires de :
 
 - Trouver rapidement une place disponible
 - Réserver à l'avance pour éviter les mauvaises surprises
@@ -83,16 +81,16 @@ npx cap run android   # ou ios
   - Interface claire et professionnelle
 
 ---
-
+<!-- 
 ## 📸 Aperçus
 
-*(Ajouter ici des captures d’écran de l’application)*
+*(Ajouter ici des captures d’écran de l’application)* -->
 
 ---
 
 ## 💡 Vision
 
-Notre objectif avec Parkin est de **transformer la gestion des parkings** en la rendant aussi fluide qu’une réservation de vol ou d’hôtel.  
+Notre objectif avec Park' In est de **transformer la gestion des parkings** en la rendant aussi fluide qu’une réservation de vol ou d’hôtel.
 Nous voulons que chaque utilisateur se concentre sur ce qui compte vraiment, sans perdre de temps à chercher une place.
 
 ---
