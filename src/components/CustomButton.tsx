@@ -5,7 +5,7 @@ const CustomButton: React.FC = ({}) => {
     return(
         <div className='customButton--div'>
             <div className='customButton--div--child'>
-                <IonButton className='customButton--button'>Réserver une place</IonButton>
+                <IonButton color="dark" className='customButton--button'>Réserver une place</IonButton>
             </div>
         </div>
     )

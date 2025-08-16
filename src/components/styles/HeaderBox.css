@@ -1,0 +1,42 @@
+.headerbox--div{
+    margin: 0.5rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+}
+
+.headerbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 9999px;
+  background: #1f1f1f;
+  color: white;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+  margin: 1rem;
+}
+
+.headerbox__avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.headerbox__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.headerbox__title {
+  font-size: 10px;
+  opacity: 0.8;
+}
+
+.headerbox__value {
+  font-weight: 600;
+  font-size: 14px;
+}

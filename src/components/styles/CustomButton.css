@@ -1,5 +1,6 @@
 .customButton--button{
     width: 100%;
+    background-color: black;
 }
 
 .customButton--div{
@@ -10,5 +11,5 @@
 }
 
 .customButton--div--child{
-    width: 50%;
+    width: 70%;
 }

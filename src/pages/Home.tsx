@@ -5,15 +5,17 @@ import WelcomeText from '../components/welcome-text';
 import ReservationText from '../components/reservation-text';
 import CustomButton from '../components/CustomButton';
 import CustomTable from '../components/CustomTable';
+import HeaderBox from '../components/HeaderBox';
+// import RenderMapsOnHome from '../components/RenderMapsOnHome';
 
 const Home: React.FC = () => {
   return (
     <IonPage>
-      <IonHeader>
+      {/* <IonHeader>
         <IonToolbar>
           <IonTitle>Accueil</IonTitle>
         </IonToolbar>
-      </IonHeader>
+      </IonHeader> */}
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
@@ -21,15 +23,10 @@ const Home: React.FC = () => {
           </IonToolbar>
         </IonHeader>
 
-        <WelcomeText name='Georgio'/>
-        <ReservationText
-          hour={{ exactHour: 14, exactMinute: 30 }}
-          nomEntreprise="OpenAI"
-          nomLieu="Montréal"
-          numeroParking={42}
-        />
+        <HeaderBox title={'Welcome Back'} value={'Georgio'} />
+        <ReservationText hour={{exactHour :14, exactMinute: 22}} nomEntreprise={'ICC Sherbrooke'} nomLieu={'Parking ICC Sherbrooke'} numeroParking={3} />
         <CustomButton />
-        <CustomTable /> 
+        {/* <RenderMapsOnHome /> */}
       </IonContent>
     </IonPage>
   );

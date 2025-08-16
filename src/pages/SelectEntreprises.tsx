@@ -10,8 +10,14 @@ import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import InboxIcon from '@mui/icons-material/Inbox';
 import DraftsIcon from '@mui/icons-material/Drafts';
+import ListSubheader from '@mui/material/ListSubheader';
 
 const SelectEntreprises: React.FC = () => {
+  const entreprises = [
+    { name : "ICC Sherbrooke" },
+    { name : "Hotel Dieu - CHUS" },
+    { name : "Université de Sherbrooke" },
+  ]
   return (
     <IonPage>
       <IonHeader>
@@ -20,29 +26,29 @@ const SelectEntreprises: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-          <nav aria-label="main mailbox folders">
-            <List>
-              <ListItem disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    <InboxIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Inbox" />
-                </ListItemButton>
-              </ListItem>
-              <ListItem disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    <DraftsIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Drafts" />
-                </ListItemButton>
-              </ListItem>
+        <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
+          {/* <nav aria-label="main mailbox folders">
+            <List subheader={
+              <ListSubheader component="div" id="nested-list-subheader">
+                Selectionnez l'entreprise visée
+              </ListSubheader>
+            }>
+              {entreprises.map((e) => (
+                <>
+                  <ListItem disablePadding>
+                    <ListItemButton>
+                      <ListItemIcon>
+                        <InboxIcon />
+                      </ListItemIcon>
+                      <ListItemText primary={e.name} />
+                    </ListItemButton>
+                  </ListItem>
+                </>
+              ))}
             </List>
-          </nav>
+          </nav> */}
           <Divider />
-          <nav aria-label="secondary mailbox folders">
+          {/* <nav aria-label="secondary mailbox folders">
             <List>
               <ListItem disablePadding>
                 <ListItemButton>
@@ -55,7 +61,7 @@ const SelectEntreprises: React.FC = () => {
                 </ListItemButton>
               </ListItem>
             </List>
-          </nav>
+          </nav> */}
         </Box>
       </IonContent>
     </IonPage>
