@@ -4,4 +4,5 @@
     <string name="title_activity_main">Park\'In</string>
     <string name="package_name">com.kgv.parkin</string>
     <string name="custom_url_scheme">com.kgv.parkin</string>
+    <string name="google_maps_api_key">AIzaSyDxdwEIjs9ZZrLJGsgiZ4K_N8wuJlukfGA</string>
 </resources>

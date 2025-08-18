@@ -13,3 +13,8 @@ interface Hour {
   exactHour: number;    
   exactMinute: number;  
 }
+
+
+export interface TextButtonProps {
+  text: string;
+}

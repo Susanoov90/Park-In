@@ -10,11 +10,11 @@ export default defineConfig({
     react(),
     legacy()
   ],
-   server: {
-    host: true,
-    port: 5173,
-    hmr: { host: '10.238.165.216', protocol: 'ws', port: 5173 }
-  },
+  //  server: {
+  //   host: true,
+  //   port: 5173,
+  //   // hmr: { host: '10.238.165.216', protocol: 'ws', port: 5173 }
+  // },
   test: {
     globals: true,
     environment: 'jsdom',

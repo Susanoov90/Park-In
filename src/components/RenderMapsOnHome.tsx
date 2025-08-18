@@ -1,67 +1,99 @@
-// import { useEffect, useRef } from 'react';
-// import { GoogleMap } from '@capacitor/google-maps';
-// import { Geolocation } from '@capacitor/geolocation';
+import { useRef, useState } from "react";
+import { useIonViewDidEnter, useIonViewWillLeave } from "@ionic/react";
+import { GoogleMap } from "@capacitor/google-maps";
+import { Geolocation } from "@capacitor/geolocation";
+import "./styles/RenderMapsOnHome.css";
 
-// export default function RenderMapsOnHome() {
-//   const divRef = useRef<HTMLDivElement>(null);
-//   const mapRef = useRef<GoogleMap | null>(null);
-//   const watchIdRef = useRef<string | null>(null);
-//   const markerIdRef = useRef<string | null>(null);
+const RenderMapsOnHome: React.FC = () => {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const mapRef = useRef<GoogleMap | null>(null);
+  const watchIdRef = useRef<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
-//   useEffect(() => {
-//     (async () => {
-//       // 1) Demander les permissions de localisation
-//       await Geolocation.requestPermissions();
+  useIonViewDidEnter(() => {
+    (async () => {
+      try {
+        setLoading(true);
 
-//       // 2) Position initiale
-//       const { coords } = await Geolocation.getCurrentPosition({ enableHighAccuracy: true });
-//       const center = { lat: coords.latitude, lng: coords.longitude };
+        await Geolocation.requestPermissions();
+        const { coords } = await Geolocation.getCurrentPosition({
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 0,
+        });
 
-//       // 3) Créer la carte native dans ce container
-//       mapRef.current = await GoogleMap.create({
-//           id: 'home-map', // identifiant unique
-//           element: divRef.current!,
-//           // L'API key est lue depuis le Manifest (Android) / Info.plist (iOS)
-//           config: { center, zoom: 16 },
-//           apiKey: 'AIzaSyDxdwEIjs9ZZrLJGsgiZ4K_N8wuJlukfGA'
-//       });
+        if (containerRef.current) {
+          mapRef.current = await GoogleMap.create({
+            id: "home-map",
+            element: containerRef.current, // le div existe déjà dans le DOM
+            apiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY ?? "TA_CLE_API",
+            config: {
+              center: { lat: coords.latitude, lng: coords.longitude },
+              zoom: 16,
+            },
+          });
 
-//       // 4) Marqueur "moi"
-//       markerIdRef.current = await mapRef.current.addMarker({
-//         coordinate: center,
-//         title: 'Ma position',
-//       });
+          await mapRef.current.enableCurrentLocation(true);
+          await mapRef.current.addMarker({
+            coordinate: { lat: coords.latitude, lng: coords.longitude },
+            title: "Vous êtes ici",
+          });
 
-//       // 5) Suivi en temps réel
-//       watchIdRef.current = await Geolocation.watchPosition(
-//         { enableHighAccuracy: true },
-//         async (pos) => {
-//           if (!pos || !mapRef.current) return;
-//           const cur = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+          const id = await Geolocation.watchPosition(
+            { enableHighAccuracy: true, maximumAge: 0 },
+            async (pos) => {
+              if (!pos || !mapRef.current) return;
+              const { latitude, longitude } = pos.coords;
+              await mapRef.current.setCamera({
+                coordinate: { lat: latitude, lng: longitude },
+                zoom: 16,
+              });
+            }
+          );
+          if (id) watchIdRef.current = id as string;
 
-//           // Déplace la caméra
-//           await mapRef.current.setCamera({ coordinate: cur, animate: true });
+          setLoading(false); // carte prête → on cache l’overlay
+        }
+      } catch (e) {
+        console.error(e);
+        // Fallback visuel : Sherbrooke
+        if (containerRef.current && !mapRef.current) {
+          mapRef.current = await GoogleMap.create({
+            id: "home-map",
+            element: containerRef.current,
+            apiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY ?? "TA_CLE_API",
+            config: { center: { lat: 45.404, lng: -71.892 }, zoom: 12 },
+          });
+        }
+        setLoading(false);
+      }
+    })();
+  });
 
-//           // Met à jour le marqueur (remove + add pour rester simple)
-//           if (markerIdRef.current) {
-//             await mapRef.current.removeMarker(markerIdRef.current);
-//           }
-//           markerIdRef.current = await mapRef.current.addMarker({
-//             coordinate: cur,
-//             title: 'Ma position',
-//           });
-//         }
-//       );
-//     })();
+  useIonViewWillLeave(() => {
+    (async () => {
+      if (watchIdRef.current) {
+        await Geolocation.clearWatch({ id: watchIdRef.current });
+        watchIdRef.current = null;
+      }
+      if (mapRef.current) {
+        await mapRef.current.destroy();
+        mapRef.current = null;
+      }
+      setLoading(true); // réinitialise pour la prochaine entrée
+    })();
+  });
 
-//     // 6) Clean-up
-//     return () => {
-//       if (watchIdRef.current) Geolocation.clearWatch({ id: watchIdRef.current });
-//       mapRef.current?.destroy();
-//       mapRef.current = null;
-//     };
-//   }, []);
+  return (
+    <div className="maps--div">
+      <div className="maps--div-child">
+        {/* Le conteneur est TOUJOURS rendu */}
+        <div ref={containerRef} id="home-map" className="maps--capacitor--div" />
+        {/* Overlay "Please wait..." par-dessus */}
+        {loading && <div className="maps--overlay">Please wait...</div>}
+      </div>
+    </div>
+  );
+};
 
-//   // Container de la carte (ajuste la hauteur comme tu veux)
-//   return <div ref={divRef} style={{ height: 260, borderRadius: 12, overflow: 'hidden' }} />;
-// }
+export default RenderMapsOnHome;
